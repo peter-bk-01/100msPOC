@@ -1,0 +1,52 @@
+PODS:
+  - Flutter (1.0.0)
+  - HMSAnalyticsSDK (0.0.2)
+  - HMSBroadcastExtensionSDK (0.0.9)
+  - HMSHLSPlayerSDK (0.0.2):
+    - HMSAnalyticsSDK (= 0.0.2)
+  - HMSSDK (0.9.5):
+    - HMSAnalyticsSDK (= 0.0.2)
+    - HMSWebRTC (= 1.0.5116)
+  - hmssdk_flutter (1.7.2):
+    - Flutter
+    - HMSBroadcastExtensionSDK (= 0.0.9)
+    - HMSHLSPlayerSDK (= 0.0.2)
+    - HMSSDK (= 0.9.5)
+  - HMSWebRTC (1.0.5116)
+  - permission_handler_apple (9.3.0):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - hmssdk_flutter (from `.symlinks/plugins/hmssdk_flutter/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+SPEC REPOS:
+  trunk:
+    - HMSAnalyticsSDK
+    - HMSBroadcastExtensionSDK
+    - HMSHLSPlayerSDK
+    - HMSSDK
+    - HMSWebRTC
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  hmssdk_flutter:
+    :path: ".symlinks/plugins/hmssdk_flutter/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  HMSAnalyticsSDK: 4d2a88a729b1eb42f3d25f217c28937ec318a5b7
+  HMSBroadcastExtensionSDK: d80fe325f6c928bd8e5176290b5a4b7ae15d6fbb
+  HMSHLSPlayerSDK: 6a54ad4d12f3dc2270d1ecd24019d71282a4f6a3
+  HMSSDK: 81804295a3c5ec6016c0966f2053d7f5f51ccc26
+  hmssdk_flutter: f73b3eb0f4bf568043a4425d851f52ffdbaa49e7
+  HMSWebRTC: ae54e9dd91b869051b283b43b14f57d43b7bf8e1
+  permission_handler_apple: 036b856153a2b1f61f21030ff725f3e6fece2b78
+
+PODFILE CHECKSUM: 7be2f5f74864d463a8ad433546ed1de7e0f29aef
+
+COCOAPODS: 1.15.2
