@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hmssdk_flutter/hmssdk_flutter.dart';
@@ -57,29 +55,40 @@ class _VideoPageState extends State<VideoPage> {
                   ),
                 ],
               ),
-
+              const Text(
+                "Listeners",
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
               // THis is only fir listeners
               SizedBox(
-                  height: 30,
+                  height: 60,
                   width: double.infinity,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _listenerOnlyList(state.peerTrackNodes).length,
-                    itemBuilder: (ctx, index) {
-                      return state.peerTrackNodes[index].hmsAudioTrack == null
-                          ? CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.green,
-                              child: Text(
-                                state.peerTrackNodes[index].peer!.name[0]
-                                    .toUpperCase(),
-                                maxLines: 5,
-                                style: const TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              ),
-                            )
-                          : const SizedBox();
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _listenerOnlyList(state.peerTrackNodes).length,
+                      itemBuilder: (ctx, index) {
+                        return CircleAvatar(
+                          radius: 32,
+                          backgroundColor: Colors.green,
+                          child: Text(
+                            _listenerOnlyList(state.peerTrackNodes)[index]
+                                .peer!
+                                .name
+                                .substring(0, 2)
+                                .toUpperCase(),
+                            style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        );
+                      },
+                    ),
                   )),
             ],
           );
@@ -90,16 +99,8 @@ class _VideoPageState extends State<VideoPage> {
     );
   }
 
-  List<PTrackNode> _getVideoOfBroadcaster(List<PTrackNode> peerTrackNodes) {
-    var newList =
-        peerTrackNodes.where((e) => e.peer?.videoTrack != null).toList();
-    log("${newList.length}lorem ipsum dolor sit amet 44444447732382bhibsdisd94394594504545niwefa df################################################");
-    return newList;
-  }
-
   List<PTrackNode> _listenerOnlyList(List<PTrackNode> peerTrackNodes) {
-    var newList =
-        peerTrackNodes.where((e) => e.peer?.audioTrack == null).toList();
+    var newList = peerTrackNodes.where((e) => e.hmsVideoTrack == null).toList();
     return newList;
   }
 

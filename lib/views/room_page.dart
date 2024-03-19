@@ -147,6 +147,11 @@ class RoomBuilderWidget extends StatelessWidget {
                 },
               ),
             ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: kToolbarHeight + 40,
+              ),
+            ),
           ],
         ),
       ),
