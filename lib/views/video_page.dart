@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hmssdk_flutter/hmssdk_flutter.dart';
 import 'package:video_hundred_ms/bloc/room/p_track_node.dart';
 import 'package:video_hundred_ms/bloc/room/room_bloc.dart';
 import 'package:video_hundred_ms/bloc/room/room_state.dart';
@@ -25,10 +24,6 @@ class _VideoPageState extends State<VideoPage> {
             state.peerTrackNodes.isNotEmpty) {
           return Column(
             children: [
-              // state.peerTrackNodes.isNotEmpty
-              //     ?
-              //     : const SizedBox(),
-
               Column(
                 children: [
                   ...state.peerTrackNodes.map(
@@ -102,15 +97,5 @@ class _VideoPageState extends State<VideoPage> {
   List<PTrackNode> _listenerOnlyList(List<PTrackNode> peerTrackNodes) {
     var newList = peerTrackNodes.where((e) => e.hmsVideoTrack == null).toList();
     return newList;
-  }
-
-  int getNotNullVideoTrackIndex(List<PTrackNode> peerTrackNodes) {
-    var index = peerTrackNodes.indexWhere((e) => e.hmsVideoTrack != null);
-    return index >= 0 ? index : -1;
-  }
-
-  HMSVideoTrack getPTrackNode(List<PTrackNode> peerTrackNodes) {
-    return peerTrackNodes[getNotNullVideoTrackIndex(peerTrackNodes)]
-        .hmsVideoTrack!;
   }
 }
