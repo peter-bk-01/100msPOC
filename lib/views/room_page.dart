@@ -69,6 +69,9 @@ class RoomBuilderWidget extends StatelessWidget {
       ),
       bottomSheet: TextField(
         controller: context.read<RoomBloc>().chatTextController,
+        decoration: const InputDecoration(
+          hintText: "Start typing to chat..",
+        ),
         onSubmitted: (v) {
           context.read<RoomBloc>().add(RoomSendMessage(message: v));
         },

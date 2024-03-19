@@ -78,7 +78,7 @@ class RoomListener implements HMSUpdateListener, HMSActionResultListener {
   @override
   void onPeerUpdate({required HMSPeer peer, required HMSPeerUpdate update}) {
     if (update == HMSPeerUpdate.peerJoined) {
-      addPeer(peer.videoTrack, peer, hmsAudioTrack: peer.audioTrack);
+      // addPeer(peer.videoTrack, peer, hmsAudioTrack: peer.audioTrack);
 
       roomBloc.add(RoomOnPeerUpdate(peer: peer, update: update));
     } else if (update == HMSPeerUpdate.peerLeft) {
@@ -120,7 +120,22 @@ class RoomListener implements HMSUpdateListener, HMSActionResultListener {
   void onTrackUpdate(
       {required HMSTrack track,
       required HMSTrackUpdate trackUpdate,
-      required HMSPeer peer}) {}
+      required HMSPeer peer}) {
+    if (track.kind == HMSTrackKind.kHMSTrackKindVideo) {
+      if (trackUpdate == HMSTrackUpdate.trackRemoved) {
+        roomBloc
+            .add(RoomOnPeerUpdate(peer: peer, update: HMSPeerUpdate.peerLeft));
+        deletePeer(peer.peerId);
+      } else if (trackUpdate == HMSTrackUpdate.trackAdded ||
+          trackUpdate == HMSTrackUpdate.trackMuted ||
+          trackUpdate == HMSTrackUpdate.trackUnMuted) {
+        roomBloc.add(RoomOnPeerJoin(
+          hmsPeer: peer,
+          hmsVideoTrack: track as HMSVideoTrack,
+        ));
+      }
+    }
+  }
 
   @override
   void onUpdateSpeakers({required List<HMSSpeaker> updateSpeakers}) {}
