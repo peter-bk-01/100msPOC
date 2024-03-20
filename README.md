@@ -6,6 +6,8 @@ A Flutter project for 100ms POC. You can find the References here
 2. (https://www.100ms.live/docs/flutter/v2/quickstart/quickstart)
 3. (https://www.100ms.live/docs/flutter/v2/quickstart/audio-room-quickstart)
 4. [Sample App HERE](https://github.com/100mslive/100ms-flutter/tree/main/sample%20apps/bloc)
+5. [Join as broadcaster in web](https://peter-livestream-01.app.100ms.live/streaming/meeting/twj-tzbr-jqj)
+6. [Join as Viewer in web](https://peter-livestream-01.app.100ms.live/streaming/meeting/jpk-acvg-hak)
 
 ## Main Files and its responsibility
 

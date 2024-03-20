@@ -30,12 +30,13 @@ class _VideoPageState extends State<VideoPage> {
                     (e) => e.hmsVideoTrack != null
                         ? Stack(
                             children: [
-                              
                               SizedBox(
                                   height: 400.0,
                                   width: 400.0,
-                                  child: e.hmsVideoTrack != null  
-                                      ? e.hmsVideoTrack!.isMute /// When Video Camera is Off
+                                  child: e.hmsVideoTrack != null
+                                      ? e.hmsVideoTrack!.isMute
+
+                                          /// When Video Camera is Off
                                           ? CircleAvatar(
                                               radius: 20,
                                               backgroundColor: Colors.blue,
@@ -49,7 +50,8 @@ class _VideoPageState extends State<VideoPage> {
                                                 ),
                                               ),
                                             )
-                                          : VideoView(e.hmsVideoTrack!) // When Video is on
+                                          : VideoView(e
+                                              .hmsVideoTrack!) // When Video is on
                                       : const SizedBox()),
                               Positioned(
                                 top: 20,
