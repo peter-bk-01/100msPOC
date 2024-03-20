@@ -71,6 +71,8 @@ class RoomLeaveMeeting extends RoomState {
   List<Object?> get props => [leaveMeeting];
 }
 
+
+/// This state is used to update the peer track nodes in the room
 class RoomPeerTrackNodeUpdated extends RoomState {
   final List<PTrackNode> peerTrackNodes;
 

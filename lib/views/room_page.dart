@@ -50,20 +50,40 @@ class RoomBuilderWidget extends StatelessWidget {
       floatingActionButton: BlocBuilder<RoomBloc, RoomState>(
         buildWhen: (previous, current) => current is RoomControllerState,
         builder: (context, state) {
-          return FloatingActionButton(
-            onPressed: () {
-              context.read<RoomBloc>().add(RoomLocalPeerAudioToggled(
-                  isMute: state is RoomControllerState
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  context.read<RoomBloc>().add(RoomLocalPeerAudioToggled(
+                      isMute: state is RoomControllerState
+                          ? state.isAudioMute!
+                          : false));
+                },
+                child: Icon(
+                  state is RoomControllerState
                       ? state.isAudioMute!
-                      : false));
-            },
-            child: Icon(
-              state is RoomControllerState
-                  ? state.isAudioMute!
-                      ? Icons.mic_off
-                      : Icons.mic
-                  : Icons.mic,
-            ),
+                          ? Icons.mic_off
+                          : Icons.mic
+                      : Icons.mic,
+                ),
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  context.read<RoomBloc>().add(RoomLocalPeerVideoToggled(
+                      isVideoOn: state is RoomControllerState
+                          ? state.isVideoMute!
+                          : false));
+                },
+                child: Icon(
+                  state is RoomControllerState
+                      ? state.isVideoMute!
+                          ? Icons.videocam_off
+                          : Icons.videocam
+                      : Icons.videocam,
+                ),
+              ),
+            ],
           );
         },
       ),
@@ -105,6 +125,8 @@ class RoomBuilderWidget extends StatelessWidget {
                 },
               ),
             ),
+
+            // THE VIDEO PAGE
             SliverToBoxAdapter(
               child: BlocBuilder<RoomBloc, RoomState>(
                 builder: (ctx, state) {
@@ -117,6 +139,8 @@ class RoomBuilderWidget extends StatelessWidget {
                 },
               ),
             ),
+
+            // Sending and Receiving Messages
             SliverToBoxAdapter(
               child: BlocBuilder<RoomBloc, RoomState>(
                 buildWhen: (previous, current) =>
@@ -136,7 +160,7 @@ class RoomBuilderWidget extends StatelessWidget {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    '${state.hmsMessage?[index]?.sender?.name == "kkkk" ? 's' : 'sq'}: ${state.hmsMessage?[index]?.message ?? ""}',
+                                    '${state.hmsMessage?[index]?.sender?.name}: ${state.hmsMessage?[index]?.message ?? ""}',
                                     style: const TextStyle(
                                         fontSize: 14, color: Colors.redAccent),
                                   ),

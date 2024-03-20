@@ -116,6 +116,14 @@ class RoomListener implements HMSUpdateListener, HMSActionResultListener {
     }
   }
 
+    /// This is called when there are updates on an existing track
+    /// or a new track got added/existing track is removed
+    ///
+    /// This callback can be used to render the video on screen whenever a track gets added
+    /// - Parameters:
+    ///   - track: the track which was added, removed or updated
+    ///   - trackUpdate: the triggered update type
+    ///   - peer: the peer for which the track was added, removed or updated
   @override
   void onTrackUpdate(
       {required HMSTrack track,

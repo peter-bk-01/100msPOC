@@ -17,7 +17,8 @@ class RoomInit extends RoomEvent {
 class RoomSubscriptionRequested extends RoomEvent {}
 
 class RoomLocalPeerVideoToggled extends RoomEvent {
-  const RoomLocalPeerVideoToggled();
+  final bool isVideoOn;
+  const RoomLocalPeerVideoToggled({required this.isVideoOn});
 }
 
 class RoomLocalPeerScreenshareToggled extends RoomEvent {

@@ -18,6 +18,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<RoomOnPeerJoin>((event, emit) => _onPeerJoin(event, emit));
     on<RoomOnPeerUpdate>((event, emit) => _onPeerUpdate(event, emit));
     on<RoomLocalPeerAudioToggled>((event, emit) => _onLocalMute(event, emit));
+    on<RoomLocalPeerVideoToggled>((event, emit) => _onLocalVideoToggled(event, emit));
     on<RoomSendMessage>((event, emit) => _onSendMessage(event, emit));
     on<RoomOnMessageReceived>((event, emit) => _onMessageReceived(event, emit));
   }
@@ -25,7 +26,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
   void _init(RoomInit event, Emitter<RoomState> emit) async {
     emit(RoomLoading());
     hmsSdk.destroy();
-    await hmsSdk.build();
+    await hmsSdk.build(); // ensure to await while invoking the `build` method
     hmsSdk.addUpdateListener(listener: roomListener);
     await getToken(event.isBroadCaster);
     emit(RoomLoaded());
@@ -76,6 +77,13 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     var value = await hmsSdk.isAudioMute();
     log(value.toString());
     emit(RoomControllerState(isAudioMute: value));
+  }
+  void _onLocalVideoToggled(
+      RoomLocalPeerVideoToggled event, Emitter<RoomState> emit) async {
+    await hmsSdk.toggleCameraMuteState();
+    var value = await hmsSdk.isVideoMute();
+    log(value.toString());
+    emit(RoomControllerState(isVideoMute: value));
   }
 
   Future<void> _onSendMessage(
